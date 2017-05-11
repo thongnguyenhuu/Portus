@@ -14,7 +14,7 @@ services:
     volumes:
       - .:/portus
     ports:
-      - 3000:3000
+      - 80:3000
     links:
       - db
 
@@ -38,7 +38,7 @@ services:
   registry:
     image: library/registry:2.3.1
     environment:
-      - REGISTRY_AUTH_TOKEN_REALM=http://${EXTERNAL_IP}:3000/v2/token
+      - REGISTRY_AUTH_TOKEN_REALM=http://${EXTERNAL_IP}:80/v2/token
       - REGISTRY_AUTH_TOKEN_SERVICE=${EXTERNAL_IP}:${REGISTRY_PORT}
       - REGISTRY_AUTH_TOKEN_ISSUER=${EXTERNAL_IP}
     volumes:
