@@ -53,9 +53,9 @@ services:
   portus-ssl:
     image: nginx
     environment:
-      - NGINX_CERT_FILE: /etc/nginx/certs/star.bryonyportal.com.crt
-      - NGINX_KEY_FILE: /etc/nginx/certs/star.bryonyportal.com.key
-      - NGINX_DOMAIN: dhub.bryonyportal.com
+      - NGINX_CERT_FILE=/etc/nginx/certs/star.bryonyportal.com.crt
+      - NGINX_KEY_FILE=/etc/nginx/certs/star.bryonyportal.com.key
+      - NGINX_DOMAIN=dhub.bryonyportal.com
     volumes:
       - ./nginx/proxy:/etc/nginx/conf.d
       - /etc/nginx/certs:/etc/nginx/certs
