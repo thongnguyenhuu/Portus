@@ -31,7 +31,7 @@ ENV YARN_VERSION 0.23.2
 RUN npm install -g yarn@$YARN_VERSION
 
 ENV COMPOSE=1
-EXPOSE 3000
+EXPOSE 80
 
 WORKDIR /portus
 COPY Gemfile* ./
