@@ -41,5 +41,4 @@ RUN apt-get update && \
 
 ADD . .
 RUN npm install
-RUN npm install -g webpack
 RUN npm run webpack
