@@ -31,7 +31,7 @@ ENV YARN_VERSION 0.23.2
 RUN npm install -g yarn@$YARN_VERSION
 
 ENV COMPOSE=1
-EXPOSE 80
+EXPOSE 3000
 
 WORKDIR /portus
 COPY Gemfile* ./
@@ -42,3 +42,4 @@ RUN apt-get update && \
 ADD . .
 RUN npm install
 RUN npm install -g webpack
+RUN npm run webpack
