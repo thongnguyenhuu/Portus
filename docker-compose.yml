@@ -14,7 +14,7 @@ services:
     volumes:
       - .:/portus
     ports:
-      - 80:3000
+      - 3000:3000
     links:
       - db
 
@@ -38,7 +38,7 @@ services:
   registry:
     image: library/registry:2.3.1
     environment:
-      - REGISTRY_AUTH_TOKEN_REALM=http://${EXTERNAL_IP}:80/v2/token
+      - REGISTRY_AUTH_TOKEN_REALM=https://${EXTERNAL_IP}:443/v2/token
       - REGISTRY_AUTH_TOKEN_SERVICE=${EXTERNAL_IP}:${REGISTRY_PORT}
       - REGISTRY_AUTH_TOKEN_ISSUER=${EXTERNAL_IP}
     volumes:
@@ -48,5 +48,18 @@ services:
     ports:
       - ${REGISTRY_PORT}:5000
       - 5001:5001 # required to access debug service
+    links:
+      - web
+  portus-ssl:
+    image: nginx
+    environment:
+      - NGINX_CERT_FILE: /etc/nginx/certs/star.bryonyportal.com.crt
+      - NGINX_KEY_FILE: /etc/nginx/certs/star.bryonyportal.com.key
+      - NGINX_DOMAIN: dhub.bryonyportal.com
+    volumes:
+      - ./nginx/proxy:/etc/nginx/conf.d
+      - /etc/nginx/certs:/etc/nginx/certs
+    ports:
+      - 443:443
     links:
       - web
